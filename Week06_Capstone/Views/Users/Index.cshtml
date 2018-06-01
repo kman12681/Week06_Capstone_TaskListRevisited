@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Week06_Capstone.Models.User>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employees";
 }
 
-<h2>Index</h2>
+<h2>Employees with Tasks</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a person", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ID })*@ 
+            @Html.ActionLink("Show Tasks", "Details", new { id = item.ID }, new { @class="btn btn-primary"}) 
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
         </td>
     </tr>
 }

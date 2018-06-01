@@ -62,15 +62,20 @@ namespace Week06_Capstone.Controllers
                 {
                     newList.Add(i);
                 }
-            }            
+            }
 
-           
+            
             ViewBag.Item = newList.ToList();
 
             return View();
+        }
 
+        public ActionResult TasksByUser2(string name)
+        {
 
-
+            TaskListEntities orm = new TaskListEntities();
+            ViewBag.Items = orm.Users.Where(x => x.Name == name).ToList();
+            return View();
         }
     }
 }

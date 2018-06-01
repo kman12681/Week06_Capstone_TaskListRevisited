@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
-<div>
-    <h4>User</h4>
+@*<div>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,8 +27,33 @@
         </dd>
 
     </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>*@
+
+<table class="table table-bordered">
+    <tr>
+       
+        
+        <th>Description</th>
+        <th>DueDate</th>
+        <th>Complete?</th>
+
+        @for (int i = 0; i < ViewBag.Item.Count; i++)
+        {
+
+
+        <tr>
+            
+            
+            <td>@ViewBag.Item[i].Description</td>
+            <td>@ViewBag.Item[i].DueDate</td>
+            <td>@ViewBag.Item[i].Status</td>
+
+
+        </tr>
+    }
+
+    </table>
+    <p>
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+        @Html.ActionLink("Back to List", "Index")
+    </p>

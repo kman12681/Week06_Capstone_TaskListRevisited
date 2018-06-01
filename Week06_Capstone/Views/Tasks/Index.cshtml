@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Week06_Capstone.Models.Task>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tasks";
 }
 
-<h2>Index</h2>
+<h2>Tasks</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,10 +18,12 @@
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @*@Html.DisplayNameFor(model => model.Status)*@
+            Complete?
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Name)
+            @*@Html.DisplayNameFor(model => model.User.Name)*@
+            Owner
         </th>
         <th></th>
     </tr>
@@ -41,9 +43,9 @@
             @Html.DisplayFor(modelItem => item.User.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TaskID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskID })
+            @Html.ActionLink("Edit Task", "Edit", new { id=item.TaskID }, new { @class = "btn btn-primary" }) 
+            @*@Html.ActionLink("Details", "Details", new { id=item.TaskID }) |*@
+            @Html.ActionLink("Delete Task", "Delete", new { id=item.TaskID }, new { @class = "btn btn-primary" })
         </td>
     </tr>
 }

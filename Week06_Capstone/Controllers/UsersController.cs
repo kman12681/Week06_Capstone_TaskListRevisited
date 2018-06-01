@@ -32,7 +32,45 @@ namespace Week06_Capstone.Controllers
             {
                 return HttpNotFound();
             }
+
+            TaskListEntities orm = new TaskListEntities();
+            List<Task> taskList = orm.Tasks.ToList();
+            List<Task> newList = new List<Task>();
+
+
+            foreach (Task i in taskList)
+            {
+                if (i.Owner == id)
+                {
+                    newList.Add(i);
+                }
+            }
+
+
+            ViewBag.Item = newList.ToList();
+
             return View(user);
+        }
+
+        public ActionResult TaskDetails(int? id)
+        {
+            TaskListEntities orm = new TaskListEntities();
+            List<Task> taskList = orm.Tasks.ToList();
+            List<Task> newList = new List<Task>();
+
+
+            foreach (Task i in taskList)
+            {
+                if (i.Owner == id)
+                {
+                    newList.Add(i);
+                }
+            }
+
+
+            ViewBag.Item = newList.ToList();
+
+            return View();
         }
 
         // GET: Users/Create
