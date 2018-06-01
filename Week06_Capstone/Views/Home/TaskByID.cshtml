@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "TaskByID";
+}
+
+<h2>TaskByID</h2>
+
+<table class="table table-bordered">
+    <tr>
+
+        <th>TaskID</th>
+        <th>Description</th>
+        <th>DueDate</th>
+        <th>Complete?</th>
+
+        @for (int i = 0; i < ViewBag.Item.Count; i++)
+        {
+
+
+    <tr>
+        <td>@ViewBag.Item[i].Owner</td>
+        <td>@ViewBag.Item[i].Description</td>
+        <td>@ViewBag.Item[i].DueDate</td>
+        <td>@ViewBag.Item[i].Status</td>
+
+
+    </tr>
+    }
+
+    </table>
+
