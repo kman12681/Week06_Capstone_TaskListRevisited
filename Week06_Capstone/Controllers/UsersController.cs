@@ -86,11 +86,19 @@ namespace Week06_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Email,ID")] User user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.Message = $"Hmm, something went wrong. {e.Message}";
             }
 
             return View(user);

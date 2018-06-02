@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "TaskSearch";
+}
+
+<h2>Task Info</h2>
+
+<h2>@ViewBag.Message</h2>
+
+<table class="table table-bordered">
+    <tr>
+
+        <th>Name</th>
+        <th>Description</th>
+        <th>DueDate</th>
+        <th>Complete?</th>
+
+        @for (int i = 0; i < ViewBag.Items.Count; i++)
+        {
+
+
+        <tr>
+            <td>@ViewBag.Items[i].User.Name</td>
+            <td>@ViewBag.Items[i].Description</td>
+            <td>@ViewBag.Items[i].DueDate</td>
+            <td>@ViewBag.Items[i].Status</td>
+
+
+        </tr>
+    }
+
+    </table>
+<p>@Html.ActionLink("Task List", "Index")</p>
+
+
+

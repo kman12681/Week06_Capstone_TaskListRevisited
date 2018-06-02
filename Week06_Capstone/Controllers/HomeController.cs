@@ -15,67 +15,6 @@ namespace Week06_Capstone.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult TaskByID(int? id)
-        {
-            TaskListEntities orm = new TaskListEntities();
-            List<Task> taskList = orm.Tasks.ToList();
-            List<Task> newList = new List<Task>();
-
-            foreach (Task i in taskList)
-            {
-                if (i.TaskID == id)
-                {
-                    newList.Add(i);
-                }
-            }
-
-            ViewBag.Item = newList.ToList();
-
-            return View();
-
-        }
-
-        public ActionResult TasksByUser(int? id)
-        {
-            TaskListEntities orm = new TaskListEntities();
-            List<Task> taskList = orm.Tasks.ToList();
-            List<Task> newList = new List<Task>();
-           
-
-            foreach (Task i in taskList)
-            {
-                if (i.Owner == id)
-                {
-                    newList.Add(i);
-                }
-            }
-
-            
-            ViewBag.Item = newList.ToList();
-
-            return View();
-        }
-
-        public ActionResult TasksByUser2(string name)
-        {
-
-            TaskListEntities orm = new TaskListEntities();
-            ViewBag.Items = orm.Users.Where(x => x.Name == name).ToList();
-            return View();
-        }
     }
 }

@@ -16,13 +16,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Welcome", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li>@Html.ActionLink("Employees", "Index", "Users")</li>
-                    <li>@Html.ActionLink("Tasks", "Index", "Tasks")</li>
+                    <li>@Html.ActionLink("Task List", "Index", "Tasks")</li>                    
                 </ul>
             </div>
         </div>
@@ -31,7 +31,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Company XYZ</p>
+            <p>&copy; @DateTime.Now.Year - GC & Co.</p>
         </footer>
     </div>
 

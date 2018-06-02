@@ -50,14 +50,22 @@ namespace Week06_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Description,DueDate,Status,TaskID,Owner")] Task task)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Tasks.Add(task);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Tasks.Add(task);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.Owner = new SelectList(db.Users, "ID", "Name", task.Owner);
+                ViewBag.Owner = new SelectList(db.Users, "ID", "Name", task.Owner);
+            }
+            catch (Exception e)
+            {
+
+                ViewBag.Message = $"Hmm, something went wrong. {e.Message}";
+            }
             return View(task);
         }
 
@@ -84,13 +92,21 @@ namespace Week06_Capstone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Description,DueDate,Status,TaskID,Owner")] Task task)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(task).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(task).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.Owner = new SelectList(db.Users, "ID", "Name", task.Owner);
             }
-            ViewBag.Owner = new SelectList(db.Users, "ID", "Name", task.Owner);
+            catch (Exception e)
+            {
+
+                ViewBag.Message = $"Hmm, something went wrong. {e.Message}";
+            }
             return View(task);
         }
 
@@ -118,6 +134,26 @@ namespace Week06_Capstone.Controllers
             db.Tasks.Remove(task);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult TaskSearch(string word)
+        {
+
+            TaskListEntities orm = new TaskListEntities();
+            
+            ViewBag.Items = orm.Tasks.Where(x => x.Description.Contains(word)).ToList();
+            if (ViewBag.Items == null)
+            {
+                ViewBag.Message = "No tasks matching that description";
+                return View();
+            }
+            else
+            {
+                return View();
+            }           
+           
+
+
         }
 
         protected override void Dispose(bool disposing)
