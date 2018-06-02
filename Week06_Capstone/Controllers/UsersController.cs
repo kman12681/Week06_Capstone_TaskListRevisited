@@ -12,12 +12,14 @@ namespace Week06_Capstone.Controllers
 {
     public class UsersController : Controller
     {
-        private TaskListEntities db = new TaskListEntities();
+        //private TaskListEntities db = new TaskListEntities();
+        private UserDAO dao = new UserDAO();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            //return View(db.Users.ToList());
+            return View(dao.GetUserList());
         }
 
         // GET: Users/Details/5
@@ -27,7 +29,8 @@ namespace Week06_Capstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            //User user = db.Users.Find(id);
+            User user = dao.GetUser((int)id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -51,28 +54,7 @@ namespace Week06_Capstone.Controllers
 
             return View(user);
         }
-
-        public ActionResult TaskDetails(int? id)
-        {
-            TaskListEntities orm = new TaskListEntities();
-            List<Task> taskList = orm.Tasks.ToList();
-            List<Task> newList = new List<Task>();
-
-
-            foreach (Task i in taskList)
-            {
-                if (i.Owner == id)
-                {
-                    newList.Add(i);
-                }
-            }
-
-
-            ViewBag.Item = newList.ToList();
-
-            return View();
-        }
-
+        
         // GET: Users/Create
         public ActionResult Create()
         {
@@ -90,8 +72,9 @@ namespace Week06_Capstone.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Users.Add(user);
-                    db.SaveChanges();
+                    dao.AddUser(user);
+                    //db.Users.Add(user);
+                    //db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -104,68 +87,71 @@ namespace Week06_Capstone.Controllers
             return View(user);
         }
 
+        // CAN OPEN UP LATER FOR ADMIN FUNCTIONS
+
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,Email,ID")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
+        //// POST: Users/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Name,Email,ID")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(user).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(user);
+        //}
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //// GET: Users/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Users/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
+                dao.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -183,6 +183,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>TaskEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

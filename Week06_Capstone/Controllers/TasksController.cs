@@ -6,19 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+
 using Week06_Capstone.Models;
 
 namespace Week06_Capstone.Controllers
 {
     public class TasksController : Controller
     {
-        private TaskListEntities db = new TaskListEntities();
+        private TaskListEntities db = new TaskListEntities();       
 
         // GET: Tasks
         public ActionResult Index()
         {
             var tasks = db.Tasks.Include(t => t.User);
-            return View(tasks.ToList());
+            return View(db.Tasks.ToList());
         }
 
         // GET: Tasks/Details/5
@@ -76,7 +77,7 @@ namespace Week06_Capstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Task task = db.Tasks.Find(id);
+            Task task = db.Tasks.Find(id);            
             if (task == null)
             {
                 return HttpNotFound();
@@ -96,6 +97,7 @@ namespace Week06_Capstone.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
                     db.Entry(task).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -117,7 +119,9 @@ namespace Week06_Capstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Task task = db.Tasks.Find(id);
+
+            Task task = db.Tasks.Find(id);   
+            
             if (task == null)
             {
                 return HttpNotFound();
@@ -150,9 +154,8 @@ namespace Week06_Capstone.Controllers
             else
             {
                 return View();
-            }           
+            }         
            
-
 
         }
 
