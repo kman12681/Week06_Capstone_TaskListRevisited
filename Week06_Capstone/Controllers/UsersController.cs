@@ -12,13 +12,13 @@ namespace Week06_Capstone.Controllers
 {
     public class UsersController : Controller
     {
-        //private TaskListEntities db = new TaskListEntities();
+        
         private UserDAO dao = new UserDAO();
 
         // GET: Users
         public ActionResult Index()
         {
-            //return View(db.Users.ToList());
+           
             return View(dao.GetUserList());
         }
 
@@ -29,7 +29,7 @@ namespace Week06_Capstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //User user = db.Users.Find(id);
+            
             User user = dao.GetUser((int)id);
             if (user == null)
             {
@@ -72,9 +72,7 @@ namespace Week06_Capstone.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    dao.AddUser(user);
-                    //db.Users.Add(user);
-                    //db.SaveChanges();
+                    dao.AddUser(user);                   
                     return RedirectToAction("Index");
                 }
             }

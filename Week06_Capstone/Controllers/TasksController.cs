@@ -140,24 +140,6 @@ namespace Week06_Capstone.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult TaskSearch(string word)
-        {
-
-            TaskListEntities orm = new TaskListEntities();
-            
-            ViewBag.Items = orm.Tasks.Where(x => x.Description.Contains(word)).ToList();
-            if (ViewBag.Items == null)
-            {
-                ViewBag.Message = "No tasks matching that description";
-                return View();
-            }
-            else
-            {
-                return View();
-            }         
-           
-
-        }
 
         protected override void Dispose(bool disposing)
         {
